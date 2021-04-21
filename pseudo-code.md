@@ -10,12 +10,12 @@ SO THAT I can gauge my progress compared to my peers
 
 - Welcome page with instructions
 - Start button
-- Displayed a timer in the upper right corner of screen, set to the allowed time for quiz (60)
+- Displayed a timer in the upper right corner of screen, set to the allowed time for quiz (75)
 - Include a "View High Scores" button in upper left corner of screen
-- Need a list of JS Fundamentals questions and answers (6?)
+- Need a list of questions and answers (5?)
   - Determine if questions should always be the same and/or in the same order?
-  - If Not: create an array of questions with answers to randomly pick from until all of the set number of questions (6?) has been displayed or All Done/game over
-  - Answers: Multiple choice
+  - If Not: create an array of questions with and related arrays of corresponding answers to randomly pick from until all of the set number of questions (5?) has been displayed or All Done/game over
+  - Answers: Multiple choice (4)
 - Timer counts down allowed time while a quiz is in progress
 - Local Storage: Store all players and their scores from quizes
 
@@ -28,7 +28,7 @@ THEN a timer starts and I am presented with a question
 ```
 
 - Start button event
-- Score/Timer begins countdown from 60 (60 seconds)
+- Timer begins countdown from 75 (75 seconds)
 - Replace instructions with first Question
 - Answers: Multiple choice Ordered List listed below
 - Each list item is clickable to submit as the answer
