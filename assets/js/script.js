@@ -1,8 +1,19 @@
+
+
+
+
+
+
+
+
+
+
+
 var timerEl = document.getElementById('countdown');
 var mainEl = document.getElementById('timer-box');
 
 var message =
-  'Some say the world will end in 🔥, Some say in ice. From what I’ve tasted of desire, I hold with those who favor fire. But if it had to perish twice, I think I know enough of hate. To say that for destruction ice, Is also great, And would suffice.';
+  'Blah blah blah';
 var words = message.split(' ');
 
 // Timer that counts down from 75
@@ -11,15 +22,11 @@ function countdown() {
 
   // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
   var timeInterval = setInterval(function () {
-    // As long as the `timeLeft` is greater than 1
-    if (timeLeft > 1) {
+    // As long as the `timeLeft` is greater than 0
+    if (timeLeft > 0) {
       // Set the `textContent` of `timerEl` to show the remaining seconds
-      timerEl.textContent = timeLeft + ' seconds remaining';
+      timerEl.textContent = 'Time: ' + timeLeft;
       // Decrement `timeLeft` by 1
-      timeLeft--;
-    } else if (timeLeft === 1) {
-      // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
-      timerEl.textContent = timeLeft + ' second remaining';
       timeLeft--;
     } else {
       // Once `timeLeft` gets to 0, set `timerEl` to an empty string
@@ -27,7 +34,7 @@ function countdown() {
       // Use `clearInterval()` to stop the timer
       clearInterval(timeInterval);
       // Call the `displayMessage()` function
-      displayMessage();
+      //displayMessage();
     }
   }, 1000);
 }
@@ -51,3 +58,48 @@ function displayMessage() {
 }
 
 countdown();
+
+
+
+
+// <question>The Race Leader wears what color jersey?</question>
+//   <answer>White</answer>
+//   <answer>Green</answer>
+//   <answer>Red polka dots</answer>
+//   <answer>Yellow</answer>
+//   <correct>Yellow</correct>
+  
+// <question>The Best Sprinter wears what color jersey?</question>
+//   <answer>White</answer>
+//   <answer>Green</answer>
+//   <answer>Red polka dots</answer>
+//   <answer>Yellow</answer>
+//   <correct>Green</correct>
+
+// <question>The Best Climber wears what color jersey?</question>
+//   <answer>White</answer>
+//   <answer>Green</answer>
+//   <answer>Red polka dots</answer>
+//   <answer>Yellow</answer>
+//   <correct>Red polka dots</correct>
+
+// <question>The Best Young Rider wears what color jersey?</question>
+//   <answer>White</answer>
+//   <answer>Green</answer>
+//   <answer>Red polka dots</answer>
+//   <answer>Yellow</answer>
+//   <correct>White</correct>
+
+// <question>How many weeks long is the race?</question>
+//   <answer>1</answer>
+//   <answer>2</answer>
+//   <answer>3</answer>
+//   <answer>4</answer>
+//   <correct>3</correct>
+
+// <question>How many rest/no racing days are there?</question>
+//   <answer>1</answer>
+//   <answer>2</answer>
+//   <answer>3</answer>
+//   <answer>4</answer>
+//   <correct>2</correct>
