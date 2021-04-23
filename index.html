@@ -12,32 +12,31 @@
         <div id="vhs-box" >
             <h3><a href="#" id="vhs-link">View High Scores</a></h3>
         </div>
-        <div id="timer-box">
-            <h3>Time: <span id="counter"></span></h3>
+        <div id="timer-box" style="display: none;">
+            <div id="counter"> 6 </div>
             <div id="bg-timeGauge"></div>
             <div id="timeGauge"></div>
         </div>
     </header>
     <main>
         <!-- Start Quiz-->
-        <div id="welcome-box" style="display: visible;">
+        <div id="welcome-box">
             <h1>Tour de France Quiz Challenge</h1>
             <p>Welcome instructions</p>
             <div id="welcom-button"><input class="button" id="start-quiz" value="Start Quiz"/></div>
         </div>
         <!-- Questions -->
         <div id="question-box" style="display: none;">
-            <h2 id="question">The Race Leader wears what color jersey?</h2>
-            <h2 id="question">The Best Sprinter wears what color jersey?</h2>
-            <h2 id="question">The Best Climber wears what color jersey?</h2>
-            <h2 id="question">The Best Young Rider wears what color jersey?</h2>
-            <ol id="answers">
-                <li id="A" onclick="checkAnswer('A')"><a href="#">White</a></li>
-                <li id="B" onclick="checkAnswer('B')"><a href="#"></a>Green</li>
-                <li id="C" onclick="checkAnswer('C')"><a href="#"></a>Red polka dots</li>
-                <li id="D" onclick="checkAnswer('D')"><a href="#"></a>Yellow</li>
-                <correct></correct>
-            </ol>
+            <div id="question"></div>
+            <div id="answers">
+                <button type="button" class="answer" id="answer-a" onclick="checkAnswer('answer-a')"></button>
+                <button type="button" class="answer" id="answer-b" onclick="checkAnswer('answer-b')"></button>
+                <button type="button" class="answer" id="answer-c" onclick="checkAnswer('answer-c')"></button>
+                <button type="button" class="answer" id="answer-d" onclick="checkAnswer('answer-d')"></button>
+                <div id="confirmation">
+                    <div class="conf"></div>
+                </div>
+            </div>
             <hr />
             <h4 id="confirmation"></h4>
         </div>
@@ -50,11 +49,11 @@
         
         <!-- High Scores -->
         <div id="high-score-box" style="display: none;">
-            <h2 id="high-score-title"></h2>
-            <ol id="scores">
-                <li id="0">1. <span id="initials">AB</span> - <span id="score">1</span></li>
-            </ol>
-            <input type="button" value="Go Back" /> <input type="button" value="Clear High Scores" />
+            <div id="high-score-title"></div>
+            <div id="scores">
+                <div id="initials"></div><div id="score"></div>
+            </div>
+            <button type="button" value="Go Back"></button> <button type="button" value="Clear High Scores"></button>
         </div>
     </main>
     
