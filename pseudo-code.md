@@ -72,6 +72,8 @@ THEN I can save my initials and my score
 - "Go Back" button return user to Welcome screen to start another quiz -- Does Not clear high score from Local Storage
 - "Clear High Score" button clears the scores on screen and from Local Storage and display message "Please take a quiz to set the High Score!"
 
+  - Local Storage: Store all players and their scores from quizes until a user clicks Clear High Scores button
+
   - NOTE: High Scores screen - Does NOT display "View High Scores" button or Timer along top corners of screen
 
 Thoughts:
@@ -80,8 +82,8 @@ Thoughts:
   - Create an array of questions,
   - with related arrays of corresponding answers
   - display a question with related answers until all of the of questions (5) have been displayed or Time <= 0
-- Timer counts down allowed time while a quiz is in progress
-- Local Storage: Store all players and their scores from quizes
 
-  - Possible: Randomize the order of the 5 Questions. More questions could be available to mix into the random order while still only displying 5 total questions for the quiz.
-  - Possilbe: Randomize the order of the 4 Answers. More answers could be available for each question to mix into the random answer order while still only displying 4 total answers for each question.
+Possibly randomize later:
+
+- Questions: Randomize the order of the 5 Questions. More questions could be available to mix into the random order while still only displying 5 total questions for the quiz.
+- Answers: Randomize the order of the 4 Answers. More answers could be available for each question to mix into the random answer order while still only displying 4 total answers for each question.
