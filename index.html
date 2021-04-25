@@ -9,49 +9,46 @@
 </head>
 <body>
     <header>
-        <div id="vhs-box" >
-            <h3><a href="#" id="vhs-link">View High Scores</a></h3>
+        <!-- View High Scores -->
+        <div id="vhsLink">
+            <h4><a href="#">View High Scores</a></h4>
         </div>
-        <div id="timer-box" style="display: none;">
-            <div id="counter"> 6 </div>
-            <div id="bg-timeGauge"></div>
-            <div id="timeGauge"></div>
-        </div>
+        <!-- Timer -->
+        <div id="countdown"></div>
     </header>
+
     <main>
-        <!-- Start Quiz-->
-        <div id="welcome-box">
+        <!-- Start -->
+        <div id="start">
             <h1>Tour de France Quiz Challenge</h1>
             <p>Welcome instructions</p>
-            <div id="welcom-button"><input class="button" id="start-quiz" value="Start Quiz"/></div>
+            <button class="button" id="startQuiz" value="Start Quiz">Start Quiz</button>
         </div>
-        <!-- Questions -->
-        <div id="question-box" style="display: none;">
+        <!-- Quiz -->
+        <div id="quiz">
+            <!-- <div id="quiz" style="display: none;"> -->
             <div id="question"></div>
-            <div id="answers">
-                <button type="button" class="answer" id="answer-a" onclick="checkAnswer('answer-a')"></button>
-                <button type="button" class="answer" id="answer-b" onclick="checkAnswer('answer-b')"></button>
-                <button type="button" class="answer" id="answer-c" onclick="checkAnswer('answer-c')"></button>
-                <button type="button" class="answer" id="answer-d" onclick="checkAnswer('answer-d')"></button>
-                <div id="confirmation">
-                    <div class="conf"></div>
-                </div>
+            <div id="choices">
+                <button type="button" class="choice" id="A" onclick="checkAnswer('A')"></button>
+                <button type="button" class="choice" id="B" onclick="checkAnswer('B')"></button>
+                <button type="button" class="choice" id="C" onclick="checkAnswer('C')"></button>
+                <button type="button" class="choice" id="D" onclick="checkAnswer('D')"></button>
             </div>
-            <hr />
-            <h4 id="confirmation"></h4>
+            <div id="answerResponse"></div> <!-- Correct or Wrong -->
         </div>
+
         <!-- Game Over / Wrap-up -->
-        <div id="done-box">
-            <h2 id="title">All done!</h2>
-            <p id="text">Your score: <span id="score">10</span></p>
-            <p>Enter your initials: <input type="text" id="initials" /> <input type="button" id="submit" /></p>
+        <div id="done" style="display: none;">
+            <h2>All done!</h2>
+            <p>Your score: <span id="score"></span></p>
+            <p>Enter your initials: <input type="text" id="initials" /> <button type="button" id="submit">Submit</button></p>
         </div>
         
         <!-- High Scores -->
-        <div id="high-score-box" style="display: none;">
-            <div id="high-score-title"></div>
-            <div id="scores">
-                <div id="initials"></div><div id="score"></div>
+        <div id="highScores" style="display: none;">
+            <div id="highScoresTitle"></div>
+            <div id="highScoresList">
+                <div id="initials"></div> <div id="score"></div>
             </div>
             <button type="button" value="Go Back"></button> <button type="button" value="Clear High Scores"></button>
         </div>

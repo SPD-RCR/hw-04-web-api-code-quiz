@@ -1,105 +1,149 @@
+const start = document.getElementById("start");
+const quiz = document.getElementById("quiz");
+const question = document.getElementById("question");
+const choiceA = document.getElementById("A");
+const choiceB = document.getElementById("B");
+const choiceC = document.getElementById("C");
+const choiceD = document.getElementById("D");
+const done = document.getElementById("done");
+const score = document.getElementById("score");
+//const highScore = document.getElementById("highScore"); // displays the High Scores list screen
 
+// Questions
+let questions = [
+  {
+    question : "The Race Leader wears what color jersey?",
+    choiceA : "White",
+    choiceB : "Green",
+    choiceC : "Red polka dots",
+    choiceD : "Yellow",
+    correct : "D"
+  },
+  {
+    question : "The Best Sprinter wears what color jersey?",
+    choiceA : "White",
+    choiceB : "Green",
+    choiceC : "Red polka dots",
+    choiceD : "Yellow",
+    correct : "B"
+  },
+  {
+    question : "The Best Climber wears what color jersey?",
+    choiceA : "White",
+    choiceB : "Green",
+    choiceC : "Red polka dots",
+    choiceD : "Yellow",
+    correct : "C"
+  },
+  {
+    question : "The Best Young Rider wears what color jersey?",
+    choiceA : "White",
+    choiceB : "Green",
+    choiceC : "Red polka dots",
+    choiceD : "Yellow",
+    correct : "A"
+  },{
+    question : "How many weeks long is the race?",
+    choiceA : "1 week",
+    choiceB : "2 weeks",
+    choiceC : "3 weeks",
+    choiceD : "4 weeks",
+    correct : "C"
+  }
+  // Hiding this question to subit homework on time. Need to fix a bug that runs all questions despite counter <= 0
+  // ,
+  // {
+  //   question : "How many rest days/no racing days are there?",
+  //   choiceA : "1 day",
+  //   choiceB : "2 days",
+  //   choiceC : "3 days",
+  //   choiceD : "4 days",
+  //   correct : "B"
+  // }
+]
 
+// Variables
+const lastQuestion = questions.length -1;
+let runningQuestion = 0; // current number of questions displayed
+var counter = 75;
+var deductTime = 15; //15s
+var timer;
+var interval;
 
-
-
-
-
-
-
-
-
-var timerEl = document.getElementById('countdown');
-var mainEl = document.getElementById('timer-box');
-
-var message =
-  'Blah blah blah';
-var words = message.split(' ');
-
-// Timer that counts down from 75
-function countdown() {
-  var timeLeft = 75;
-
-  // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
-  var timeInterval = setInterval(function () {
-    // As long as the `timeLeft` is greater than 0
-    if (timeLeft > 0) {
-      // Set the `textContent` of `timerEl` to show the remaining seconds
-      timerEl.textContent = 'Time: ' + timeLeft;
-      // Decrement `timeLeft` by 1
-      timeLeft--;
-    } else {
-      // Once `timeLeft` gets to 0, set `timerEl` to an empty string
-      timerEl.textContent = '';
-      // Use `clearInterval()` to stop the timer
-      clearInterval(timeInterval);
-      // Call the `displayMessage()` function
-      //displayMessage();
-    }
-  }, 1000);
+// Render a Question
+function renderQuestion(){
+  let q = questions[runningQuestion];
+  //console.log("q:", q);
+  question.innerHTML = "<h2>" + q.question + "</h2>";
+  choiceA.innerHTML = q.choiceA;
+  choiceB.innerHTML = q.choiceB;
+  choiceC.innerHTML = q.choiceC;
+  choiceD.innerHTML = q.choiceD;
 }
 
-// Displays the message one word at a time
-function displayMessage() {
-  var wordCount = 0;
+start.addEventListener("click", startQuiz);
 
-  // Uses the `setInterval()` method to call a function to be executed every 1000 milliseconds
-  var msgInterval = setInterval(function () {
-    // If there are no more words left in the message
-    if (words[wordCount] === undefined) {
-      // Use `clearInterval()` to stop the timer
-      clearInterval(msgInterval);
-    } else {
-      // Display one word of the message
-      mainEl.textContent = words[wordCount];
-      wordCount++;
-    }
-  }, 1000);
+//Start Quiz
+function startQuiz(){
+  start.style.display = "none";
+  quiz.style.display = "block";
+  renderQuestion();
+  timer = countdown();
 }
 
-countdown();
+function countdown(){
+  interval = setInterval(function(){
+    counter--; //countdown from counter value by 1
+    if (counter > 0){
+      div = document.getElementById('countdown');
+      div.innerHTML = "Time: " + counter;
+    }
+    if (counter <= 0) {
+      div = document.getElementById('countdown');
+      counter = 0;
+      div.innerHTML = "Time: " + counter;
+      console.log("Counter:", counter);
+      //clearInterval(interval);
+      startQuiz();
+    }
+
+    //if (counter === 0) {
+    //   alert("Sorry, Out of Time");
+    //   clearInterval(counter);
+    // }
+    }, 1000);
+}
+
+// Check Answer
+function checkAnswer(answer){
+  if (answer == questions[runningQuestion].correct) {
+    // answer is correct
+    document.getElementById("answerResponse").innerHTML = "<hr/><p>Correct</p>";
+    //answerIsCorrect();
+  } else{
+    //answer is Wrong and subtract 15 from counter
+    document.getElementById("answerResponse").innerHTML = "<hr/><p>Wrong</p>";
+    counter = counter - deductTime;
+  }
+
+  if (runningQuestion < lastQuestion) {
+    runningQuestion++;
+    renderQuestion();
+    console.log("Counter:", counter);
+  } 
+  else {
+    // end the quiz and show the score
+    console.log("Counter:", counter);
+    clearInterval(interval);
+    allDone();
+  }
+}
 
 
-
-
-// <question>The Race Leader wears what color jersey?</question>
-//   <answer>White</answer>
-//   <answer>Green</answer>
-//   <answer>Red polka dots</answer>
-//   <answer>Yellow</answer>
-//   <correct>Yellow</correct>
-  
-// <question>The Best Sprinter wears what color jersey?</question>
-//   <answer>White</answer>
-//   <answer>Green</answer>
-//   <answer>Red polka dots</answer>
-//   <answer>Yellow</answer>
-//   <correct>Green</correct>
-
-// <question>The Best Climber wears what color jersey?</question>
-//   <answer>White</answer>
-//   <answer>Green</answer>
-//   <answer>Red polka dots</answer>
-//   <answer>Yellow</answer>
-//   <correct>Red polka dots</correct>
-
-// <question>The Best Young Rider wears what color jersey?</question>
-//   <answer>White</answer>
-//   <answer>Green</answer>
-//   <answer>Red polka dots</answer>
-//   <answer>Yellow</answer>
-//   <correct>White</correct>
-
-// <question>How many weeks long is the race?</question>
-//   <answer>1</answer>
-//   <answer>2</answer>
-//   <answer>3</answer>
-//   <answer>4</answer>
-//   <correct>3</correct>
-
-// <question>How many rest/no racing days are there?</question>
-//   <answer>1</answer>
-//   <answer>2</answer>
-//   <answer>3</answer>
-//   <answer>4</answer>
-//   <correct>2</correct>
+// All Done
+function allDone(){
+  //start.style.display = "none";
+  quiz.style.display = "none";
+  done.style.display = "block";
+  document.getElementById(score) = "<span id=" + counter +"></span>";
+}
