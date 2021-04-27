@@ -1,4 +1,4 @@
-const start = document.getElementById("start");
+const intro = document.getElementById("intro");
 const quiz = document.getElementById("quiz");
 const question = document.getElementById("question");
 const choiceA = document.getElementById("A");
@@ -81,11 +81,17 @@ function renderQuestion(){
   choiceD.innerHTML = q.choiceD;
 }
 
-start.addEventListener("click", startQuiz);
+// Start Over after Counter = 0
+function startOver() {
+  intro.style.display = "block";
+  quiz.style.display = "none";
+}
+
+intro.addEventListener("click", startQuiz);
 
 //Start Quiz
 function startQuiz(){
-  start.style.display = "none";
+  intro.style.display = "none";
   quiz.style.display = "block";
   renderQuestion();
   timer = countdown();
@@ -98,16 +104,16 @@ function countdown(){
       div = document.getElementById('countdown');
       div.innerHTML = "Time: " + counter;
     }
-    if (counter <= 0) {
-      div = document.getElementById('countdown');
+    else {
       counter = 0;
+      console.log("countdown else Counter:", counter);
+      div = document.getElementById('countdown');
       div.innerHTML = "Time: " + counter;
-      console.log("Counter:", counter);
-      //clearInterval(interval);
-      startQuiz();
+      alert("Sorry, Out of Time. Please play again.");
+      clearInterval(interval);
+      startOver();
     }
-
-    //if (counter === 0) {
+    // if (counter === 0) {
     //   alert("Sorry, Out of Time");
     //   clearInterval(counter);
     // }
@@ -133,8 +139,11 @@ function checkAnswer(answer){
   } 
   else {
     // end the quiz and show the score
+
     console.log("Counter:", counter);
+    //countdown();
     clearInterval(interval);
+    console.log("CheckAnswer called AllDone", counter)
     allDone();
   }
 }
@@ -142,8 +151,10 @@ function checkAnswer(answer){
 
 // All Done
 function allDone(){
-  //start.style.display = "none";
+  //intro.style.display = "none";
   quiz.style.display = "none";
   done.style.display = "block";
-  document.getElementById(score) = "<span id=" + counter +"></span>";
+  console.log("Counter; ", counter);
+  //document.getElementById(score) 
+  score.innerHTML = "<span id='score'>" + counter +"</span>";
 }
