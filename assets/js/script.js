@@ -6,7 +6,6 @@ const choiceB = document.getElementById("B");
 const choiceC = document.getElementById("C");
 const choiceD = document.getElementById("D");
 const done = document.getElementById("done");
-var score = document.getElementById("score");
 //const highScore = document.getElementById("highScore"); // displays the High Scores list screen
 
 // Questions
@@ -154,34 +153,40 @@ function checkAnswer(answer){
 }
 
 // All Done
+
 function allDone(){
   quiz.style.display = "none";
   done.style.display = "block";
   //console.log("AllDone Counter: ", counter);
-  score.innerHTML = counter;
-  console.log("score: ", score);
+  //var userScore = counter;
+  var userScore = document.getElementById("score");
+  var userInitials = document.getElementById("initials");
+
+  userScore.innerHTML = counter;
+  console.log("allDone userScore: ", userScore);
+
+
+  submit.addEventListener("click", function(event) {
+    event.preventDefault();
+    userScore = counter;
+    console.log("after Submit userScore:", userScore);
+    
+    if (userInitials === "") {
+      alert("error", "Initials can't be blank.");
+    } else {
+      alert("Success", "Your High Score has been saved.");
+      console.log("userInitials: ", userInitials.value);
+      // create user object from submission
+    var user = {
+      score: userScore,
+      initials: userInitials.value
+    };
+
+    // set new submission to local storage 
+    localStorage.setItem("user", JSON.stringify(user));
+    }
+  });
 }
 
 //write Object to Local Storage
 
-var userScore = counter;
-var userInitials = document.querySelector("#initials").value;
-
-submit.addEventListener("click", function(event) {
-  event.preventDefault();
-
-  if (userInitials === "") {
-    alert("error", "Initials can't be blank");
-  } else {
-    alert("Success", "Your High Score has been saved.");
-
-    // create user object from submission
-  var user = {
-    Score: userScore,
-    Initials: userInitials.value.trim(),
-  };
-
-  // set new submission to local storage 
-  localStorage.setItem("user", JSON.stringify(user));
-  }
-});
