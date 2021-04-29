@@ -37,11 +37,13 @@
             <div id="answerResponse"></div> <!-- Correct or Wrong -->
         </div>
 
-        <!-- Game Over / Wrap-up -->
+        <!-- All done -->
         <div id="done" style="display: none;">
             <h2>All done!</h2>
-            <p>Your score: <span id="score"></span></p>
-            <p>Enter your initials: <input type="text" id="initials" /> <button type="button" id="submit">Submit</button></p>
+            <form method="POST">
+                <p>Your score: <span id="score"></span></p>
+                <p>Enter your initials: <input type="text" id="initials" /> <button type="button" id="submit">Submit</button></p>
+            </form>
         </div>
         
         <!-- High Scores -->
