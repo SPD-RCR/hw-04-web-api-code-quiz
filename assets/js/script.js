@@ -6,7 +6,7 @@ const choiceB = document.getElementById("B");
 const choiceC = document.getElementById("C");
 const choiceD = document.getElementById("D");
 const done = document.getElementById("done");
-const score = document.getElementById("score");
+var score = document.getElementById("score");
 //const highScore = document.getElementById("highScore"); // displays the High Scores list screen
 
 // Questions
@@ -62,14 +62,6 @@ let questions = [
   // }
 ]
 
-// Variables
-const lastQuestion = questions.length -1;
-let runningQuestion = 0; // current number of questions displayed
-var counter = 75;
-var deductTime = 15; //15s
-var timer;
-var interval;
-
 // Render a Question
 function renderQuestion(){
   let q = questions[runningQuestion];
@@ -81,11 +73,13 @@ function renderQuestion(){
   choiceD.innerHTML = q.choiceD;
 }
 
-// Start Over after Counter = 0
-function startOver() {
-  intro.style.display = "block";
-  quiz.style.display = "none";
-}
+//variables
+const lastQuestion = questions.length -1;
+let runningQuestion = 0; // current number of questions displayed
+var counter = 75; // Starting Time displayed on screen
+var deductTime = 15; //15s
+var timer;
+var interval;
 
 intro.addEventListener("click", startQuiz);
 
@@ -104,20 +98,16 @@ function countdown(){
       div = document.getElementById('countdown');
       div.innerHTML = "Time: " + counter;
     }
-    else {
-      counter = 0;
+    else if (counter <= 0) {
+      counter = 0; // Set counter to 0. Do Not display negative numbers.
       console.log("countdown else Counter:", counter);
-      div = document.getElementById('countdown');
-      div.innerHTML = "Time: " + counter;
-      alert("Sorry, Out of Time. Please play again.");
+      div = document.getElementById('countdown'); // Update Time on screen to match counter which is now 0.
+      div.innerHTML = "Time: " + 0; 
+      if (alert('Sorry, Out of Time. Please play again.')){}
+      else window.location.reload(); 
       clearInterval(interval);
-      startOver();
     }
-    // if (counter === 0) {
-    //   alert("Sorry, Out of Time");
-    //   clearInterval(counter);
-    // }
-    }, 1000);
+  }, 1000);
 }
 
 // Check Answer
@@ -135,26 +125,63 @@ function checkAnswer(answer){
   if (runningQuestion < lastQuestion) {
     runningQuestion++;
     renderQuestion();
+    console.log("Question: " + runningQuestion);
     console.log("Counter:", counter);
   } 
-  else {
-    // end the quiz and show the score
-
+  else { // After the Last Question
+    console.log("Question (last): " + runningQuestion);
     console.log("Counter:", counter);
-    //countdown();
+    // end the quiz and show the score
     clearInterval(interval);
+    //countdown();
+
+    // No more questions. Check if Time is <= 0 Dsipaly Alert. Then Reload the application at the Welcome with Start Quiz button
+    if (counter <= 0) {
+      counter = 0;
+      console.log("Last image and counter <= 0 : ", counter);
+      div = document.getElementById('countdown');
+      div.innerHTML = "Time: " + 0;
+      if (alert('Sorry, Out of Time. Please play again.')){}
+      else window.location.reload();
+    } 
+    else // No more question but user still had time left. Advance to the All Done screen to enter Initials and save score.
+    div = document.getElementById('countdown'); // Update Time on screen to match counter.
+    div.innerHTML = "Time: " + counter;
+    console.log("Question interval: " + runningQuestion);
     console.log("CheckAnswer called AllDone", counter)
     allDone();
   }
 }
 
-
 // All Done
 function allDone(){
-  //intro.style.display = "none";
   quiz.style.display = "none";
   done.style.display = "block";
-  console.log("Counter; ", counter);
-  //document.getElementById(score) 
-  score.innerHTML = "<span id='score'>" + counter +"</span>";
+  //console.log("AllDone Counter: ", counter);
+  score.innerHTML = counter;
+  console.log("score: ", score);
 }
+
+//write Object to Local Storage
+
+var userScore = counter;
+var userInitials = document.querySelector("#initials").value;
+
+submit.addEventListener("click", function(event) {
+  event.preventDefault();
+
+  if (userInitials === "") {
+    alert("error", "Initials can't be blank");
+  } else {
+    alert("Success", "Your High Score has been saved.");
+
+    // create user object from submission
+  var user = {
+    Score: userScore,
+    Initials: userInitials.value.trim(),
+  };
+
+  // set new submission to local storage 
+  localStorage.setItem("user", JSON.stringify(user));
+  }
+});
