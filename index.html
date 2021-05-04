@@ -19,13 +19,13 @@
 
     <main>
         <!-- Introduction -->
-        <div id="intro">
+        <div id="introPage">
             <h1>Tour de France Quiz Challenge</h1>
             <p>Welcome instructions</p>
             <button class="button" id="startQuiz" value="Start Quiz">Start Quiz</button>
         </div>
         <!-- Quiz -->
-        <div id="quiz">
+        <div id="quizPage">
             <!-- <div id="quiz" style="display: none;"> -->
             <div id="question"></div>
             <div id="choices">
@@ -38,20 +38,19 @@
         </div>
 
         <!-- All done -->
-        <div id="done" style="display: none;">
+        <div id="donePage" style="display: none;">
             <h2>All done!</h2>
             <form method="POST">
                 <p>Your score: <span id="score"></span></p>
-                <p>Enter your initials: <input type="text" id="initials"> <button type="submit" id="submit">Submit</button></p>
+                <p>Enter your initials: <input type="text" id="initials" /> <button type="submit" id="submit">Submit</button></p>
             </form>
         </div>
         
         <!-- High Scores -->
-        <div id="highScores" style="display: none;">
-            <div id="highScoresTitle"></div>
-            <div id="highScoresList">
-                <div id="initials"></div> <div id="score"></div>
-            </div>
+        <div id="highScoresPage" style="display: none;">
+            <div id="highScoresTitle">High Scores</div>
+            <ol id="highScoresList"></ol>
+            </ol>
             <button type="button" value="Go Back"></button> <button type="button" value="Clear High Scores"></button>
         </div>
     </main>

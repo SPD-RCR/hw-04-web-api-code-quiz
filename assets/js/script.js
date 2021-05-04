@@ -1,12 +1,12 @@
-const intro = document.getElementById("intro");
-const quiz = document.getElementById("quiz");
+const introPage = document.getElementById("introPage");
+const quizPage = document.getElementById("quizPage");
 const question = document.getElementById("question");
 const choiceA = document.getElementById("A");
 const choiceB = document.getElementById("B");
 const choiceC = document.getElementById("C");
 const choiceD = document.getElementById("D");
-const done = document.getElementById("done");
-//const highScore = document.getElementById("highScore"); // displays the High Scores list screen
+const donePage = document.getElementById("donePage");
+const highScoresPage = document.getElementById("highScoresPage");
 
 // Questions
 let questions = [
@@ -80,12 +80,12 @@ var deductTime = 15; //15s
 var timer;
 var interval;
 
-intro.addEventListener("click", startQuiz);
+introPage.addEventListener("click", startQuiz);
 
 //Start Quiz
 function startQuiz(){
-  intro.style.display = "none";
-  quiz.style.display = "block";
+  introPage.style.display = "none";
+  quizPage.style.display = "block";
   renderQuestion();
   timer = countdown();
 }
@@ -152,41 +152,105 @@ function checkAnswer(answer){
   }
 }
 
-// All Done
+var userScore = document.getElementById("score");
+var userInitials = document.getElementById("initials");
 
 function allDone(){
-  quiz.style.display = "none";
-  done.style.display = "block";
+  quizPage.style.display = "none";
+  donePage.style.display = "block";
   //console.log("AllDone Counter: ", counter);
-  //var userScore = counter;
-  var userScore = document.getElementById("score");
-  var userInitials = document.getElementById("initials");
-
   userScore.innerHTML = counter;
-  console.log("allDone userScore: ", userScore);
-
-
-  submit.addEventListener("click", function(event) {
-    event.preventDefault();
-    userScore = counter;
-    console.log("after Submit userScore:", userScore);
-    
-    if (userInitials === "") {
-      alert("error", "Initials can't be blank.");
-    } else {
-      alert("Success", "Your High Score has been saved.");
-      console.log("userInitials: ", userInitials.value);
-      // create user object from submission
-    var user = {
-      score: userScore,
-      initials: userInitials.value
-    };
-
-    // set new submission to local storage 
-    localStorage.setItem("user", JSON.stringify(user));
-    }
-  });
+  //console.log("allDone userScore: ", userScore);
 }
 
+function viewHighScores(){
+  donePage.style.display = "none";
+  highScoresPage.style.display = "block";
+  renderAllHighScores();
+};
+
 //write Object to Local Storage
+function storeUserScore() {
+  // create user object from submission
+      var user = {
+        score: userScore,
+        initials: userInitials.value.trim(),
+      };
+      localStorage.setItem("user", JSON.stringify(user));
+}
+
+
+function renderAllHighScores() {
+  // Use JSON to parce to convert text back to JS object
+  // get from Local Storage
+  var allHighScores =  JSON.parse(localStorage.getItem("user"));
+  // If there is data, write each element to the HTML on the page
+    if (allHighScores !== null) {
+      document.getElementById("score").innerHTML = allHighScores.score;
+      document.getElementById("initials").innerHTML = allHighScores.initials;
+    } else {
+      return;
+    }
+}
+
+submit.addEventListener("click", function(event) {
+  event.preventDefault();
+  userScore = counter;
+  
+  console.log("after Submit userScore:", userScore);
+  console.log("after Submit userInitials:", userInitials.value);
+  
+  if (userInitials === "") {
+    alert("error", "Initials can't be blank.");
+  } else {
+    alert("Success", "Your High Score has been saved.");
+    console.log("userInitials: ", userInitials.value.trim());
+
+    // create user object from submission
+    storeUserScore();
+  }
+  viewHighScores();
+});
+
+
+
+
+
+// All Done
+// function allDone(){
+//   quiz.style.display = "none";
+//   done.style.display = "block";
+//   //console.log("AllDone Counter: ", counter);
+//   var userScore = document.getElementById("score");
+//   var userInitials = document.getElementById("initials");
+
+//   userScore.innerHTML = counter;
+//   console.log("allDone userScore: ", userScore);
+
+//   submit.addEventListener("click", function(event) {
+//     event.preventDefault();
+//     userScore = counter;
+    
+//     console.log("after Submit userScore:", userScore);
+//     console.log("after Submit userInitials:", userInitials.value);
+    
+//     if (userInitials === "") {
+//       alert("error", "Initials can't be blank.");
+//     } else {
+//       alert("Success", "Your High Score has been saved.");
+//       console.log("userInitials: ", userInitials.value.trim());
+
+//       // create user object from submission
+//     var user = {
+//       score: userScore,
+//       initials: userInitials.value.trim(),
+//     };
+//     // set new submission to local storage 
+//     localStorage.setItem("user", JSON.stringify(user));
+//     }
+//   });
+// }
+// /////
+
+
 
