@@ -154,6 +154,7 @@ function checkAnswer(answer){
 
 var userScore = document.getElementById("score");
 var userInitials = document.getElementById("initials");
+var scoreList;
 
 function allDone(){
   quizPage.style.display = "none";
@@ -166,7 +167,7 @@ function allDone(){
 function viewHighScores(){
   donePage.style.display = "none";
   highScoresPage.style.display = "block";
-  renderAllHighScores();
+  renderScoreList();
 };
 
 //write Object to Local Storage
@@ -176,21 +177,38 @@ function storeUserScore() {
         score: userScore,
         initials: userInitials.value.trim(),
       };
-      localStorage.setItem("user", JSON.stringify(user));
+      console.log("user:", user);
+
+      var scoreList;
+      scoreList = JSON.parse(localStorage.getItem("user"));
+      // if the first time then we start with the array empty
+      if (scoreList == null){
+        scoreList = [];
+      }
+      /// push the new object into the array
+      scoreList.push(user);
+      /// save the array in the localstorage
+      console.log("Push scoreList ti LocalStorage:", scoreList);
+      // set new submission to local storage
+      localStorage.setItem("user", JSON.stringify(scoreList));
 }
 
-
-function renderAllHighScores() {
-  // Use JSON to parce to convert text back to JS object
+function renderScoreList() {
+  // Use JSON to parce to convert text back to JS objects
   // get from Local Storage
-  var allHighScores =  JSON.parse(localStorage.getItem("user"));
+  var scoreList = JSON.parse(localStorage.getItem("user"));
+  scoreList.sort((a, b) => b.score - a.score); //Sort by score in descending order
+  console.log("render Sorted ScoreList array:", scoreList);
   // If there is data, write each element to the HTML on the page
-    if (allHighScores !== null) {
-      document.getElementById("score").innerHTML = allHighScores.score;
-      document.getElementById("initials").innerHTML = allHighScores.initials;
-    } else {
-      return;
+  if (scoreList !== null) {
+    for (let i = 0; i < scoreList.length; i++) {
+      const u = scoreList[i];
+      console.log("ready for LI scoreList.score:", u.score, "scoreList.initials:", u.initials);
+    document.getElementById("highScoresList").innerHTML += "<li>Score: "+u.score+", Initials: "+u.initials+"</li>"; // Inside the div for highScoresList write each pair of data inside of a list item
     }
+  } else {
+    return;
+  }
 }
 
 submit.addEventListener("click", function(event) {
