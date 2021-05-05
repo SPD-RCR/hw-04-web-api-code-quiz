@@ -82,7 +82,7 @@ var interval;
 
 introPage.addEventListener("click", startQuiz);
 
-//Start Quiz
+// Display the Start Quiz page
 function startQuiz(){
   introPage.style.display = "none";
   quizPage.style.display = "block";
@@ -108,6 +108,22 @@ function countdown(){
     }
   }, 1000);
 }
+
+// display the All Done page
+function allDone(){
+  quizPage.style.display = "none";
+  donePage.style.display = "block";
+  //console.log("AllDone Counter: ", counter);
+  userScore.innerHTML = counter;
+  //console.log("allDone userScore: ", userScore);
+}
+
+// Display the View High Scores page
+function viewHighScores(){
+  donePage.style.display = "none";
+  highScoresPage.style.display = "block";
+  renderScoreList();
+};
 
 // Check Answer
 function checkAnswer(answer){
@@ -156,20 +172,6 @@ var userScore = document.getElementById("score");
 var userInitials = document.getElementById("initials");
 var scoreList;
 
-function allDone(){
-  quizPage.style.display = "none";
-  donePage.style.display = "block";
-  //console.log("AllDone Counter: ", counter);
-  userScore.innerHTML = counter;
-  //console.log("allDone userScore: ", userScore);
-}
-
-function viewHighScores(){
-  donePage.style.display = "none";
-  highScoresPage.style.display = "block";
-  renderScoreList();
-};
-
 //write Object to Local Storage
 function storeUserScore() {
   // create user object from submission
@@ -211,9 +213,9 @@ function renderScoreList() {
   }
 }
 
-submit.addEventListener("click", function(event) {
+donePageSubmit.addEventListener("click", function(event) {
   event.preventDefault();
-  userScore = counter;
+  userScore = counter; // Display the users's final score on the page.
   
   console.log("after Submit userScore:", userScore);
   console.log("after Submit userInitials:", userInitials.value);
@@ -229,46 +231,3 @@ submit.addEventListener("click", function(event) {
   }
   viewHighScores();
 });
-
-
-
-
-
-// All Done
-// function allDone(){
-//   quiz.style.display = "none";
-//   done.style.display = "block";
-//   //console.log("AllDone Counter: ", counter);
-//   var userScore = document.getElementById("score");
-//   var userInitials = document.getElementById("initials");
-
-//   userScore.innerHTML = counter;
-//   console.log("allDone userScore: ", userScore);
-
-//   submit.addEventListener("click", function(event) {
-//     event.preventDefault();
-//     userScore = counter;
-    
-//     console.log("after Submit userScore:", userScore);
-//     console.log("after Submit userInitials:", userInitials.value);
-    
-//     if (userInitials === "") {
-//       alert("error", "Initials can't be blank.");
-//     } else {
-//       alert("Success", "Your High Score has been saved.");
-//       console.log("userInitials: ", userInitials.value.trim());
-
-//       // create user object from submission
-//     var user = {
-//       score: userScore,
-//       initials: userInitials.value.trim(),
-//     };
-//     // set new submission to local storage 
-//     localStorage.setItem("user", JSON.stringify(user));
-//     }
-//   });
-// }
-// /////
-
-
-

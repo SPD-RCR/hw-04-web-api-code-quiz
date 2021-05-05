@@ -18,14 +18,14 @@
     </header>
 
     <main>
-        <!-- Introduction -->
+        <!-- Introduction Page-->
         <div id="introPage">
             <h1>Tour de France Quiz Challenge</h1>
             <p>Welcome instructions</p>
             <button class="button" id="startQuiz" value="Start Quiz">Start Quiz</button>
         </div>
-        <!-- Quiz -->
-        <div id="quizPage">
+        <!-- Quiz Page-->
+        <div id="quizPage" style="display: none;">
             <!-- <div id="quiz" style="display: none;"> -->
             <div id="question"></div>
             <div id="choices">
@@ -37,20 +37,22 @@
             <div id="answerResponse"></div> <!-- Correct or Wrong -->
         </div>
 
-        <!-- All done -->
+        <!-- All Done Page -->
         <div id="donePage" style="display: none;">
             <h2>All done!</h2>
             <form method="POST">
                 <p>Your score: <span id="score"></span></p>
-                <p>Enter your initials: <input type="text" id="initials" /> <button type="submit" id="submit">Submit</button></p>
+                <p>Enter your initials: <input type="text" id="initials" /> <button class="button" type="submit" id="donePageSubmit">Submit</button></p>
             </form>
         </div>
         
-        <!-- High Scores -->
+        <!-- High Scores Page -->
         <div id="highScoresPage" style="display: none;">
-            <div id="highScoresTitle">High Scores</div>
+            <h2>High Scores</h2>
             <ol id="highScoresList"></ol>
-            <button type="button" value="Go Back"></button> <button type="button" value="Clear High Scores"></button>
+            <form method="POST">
+                <button class="button" type="button" id="Go Back" value="Go Back"></button> <button class="button" type="button" id="Clear High Scores" value="Clear High Scores"></button>
+            </form>
         </div>
     </main>
     
